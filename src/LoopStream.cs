@@ -10,7 +10,7 @@ namespace Konsolka;
 /// </summary>
 public class LoopStream : WaveStream
 {
-    readonly WaveStream _sourceStream;
+    private readonly WaveStream _sourceStream;
 
     /// <summary>
     /// Creates a new Loop stream
@@ -20,13 +20,13 @@ public class LoopStream : WaveStream
     public LoopStream(WaveStream sourceStream)
     {
         _sourceStream = sourceStream;
-        EnableLooping = true;
+        _enableLooping = true;
     }
 
     /// <summary>
     /// Use this to turn looping on or off
     /// </summary>
-    private bool EnableLooping { get; }
+    private bool _enableLooping { get; }
 
     /// <summary>
     /// Return source stream's wave format
@@ -56,7 +56,7 @@ public class LoopStream : WaveStream
             int bytesRead = _sourceStream.Read(buffer, offset + totalBytesRead, count - totalBytesRead);
             if (bytesRead == 0)
             {
-                if (_sourceStream.Position == 0 || !EnableLooping)
+                if (_sourceStream.Position == 0 || !_enableLooping)
                 {
                     throw new FileLoadException("File is corrupted");
                 }

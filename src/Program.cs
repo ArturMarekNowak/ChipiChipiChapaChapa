@@ -1,7 +1,7 @@
 ﻿using Konsolka;
 using NAudio.Wave;
 
-public class Program
+public static class Program
 {
     public static async Task Main()
     {
